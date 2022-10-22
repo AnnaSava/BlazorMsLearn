@@ -4,6 +4,82 @@
 
 <h1>Hello, world!</h1>
 
+@RenderWelcomeInfo
+
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@RenderWelcomeInfo
+
+<ul>
+    <li>
+        <a href="parameter parent">Parameter</a></li>
+    <li>  
+        <a href="parameter parent-2">Parameter 2</a>
+    </li>
+    <li> 
+        <a href="render-tuple-parent">Tuple</a>
+    </li>
+    <li>
+        <a href="render-fragment-parent">Render fragment</a>
+    </li>
+    <li>
+        <a href="route-parameter/amazing">Route parameter</a>
+    </li>
+    <li>
+        <a href="expander-example">Expander</a>
+    </li>
+    <li>
+        <a href="splat">Splat</a>
+    </li>
+    <li>
+        <a href="attribute-order-parent-1">Attribute order parent 1</a>
+    </li>
+    <li>
+        <a href="attribute-order-parent-2">Attribute order parent 2</a>
+    </li>
+    <li>
+        <a href="reference-parent-1">Reference parent 1</a>
+    </li>
+    <li>
+        <a href="reference-parent-2">Reference parent 2</a>
+    </li>
+    <li>
+        <a href="receive-notifications">Receive notifications</a>
+    </li>
+    <li>
+        <a href="people">People</a>
+    </li>
+    <li>
+        <a href="conditional-attribute">Conditional attribute</a>
+    </li>
+    <li>
+        <a href="markup-string-example">Markup string example</a>
+    </li>
+    <li>
+        <a href="razor-template">Razor Template</a>
+    </li>
+    <li>
+        <a href="generic-type-example-1">Generic Type Example 1</a>
+    </li>
+    <li>
+        <a href="generic-type-example-2">Generic Type Example 2</a>
+    </li>
+    <li>
+        <a href="generic-type-example-3">Generic Type Example 3</a>
+    </li>
+    <li>
+        <a href="generic-type-example-4">Generic Type Example 4</a>
+    </li>
+    <li>
+        <a href="generic-type-example-5">Generic Type Example 5</a>
+    </li>
+</ul>
+
+@code {
+    private RenderFragment RenderWelcomeInfo = __builder =>
+    {
+        <p>Render fragments for reusable rendering logic <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-6.0#render-fragments-for-reusable-rendering-logic">Link</a></p>
+    };
+}
