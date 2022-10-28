@@ -27,4 +27,6 @@ app.MapControllerRoute(
 
 app.MapBlazorHub();
 
+app.MapFallbackToController("Blazor", "Home");
+
 app.Run();
