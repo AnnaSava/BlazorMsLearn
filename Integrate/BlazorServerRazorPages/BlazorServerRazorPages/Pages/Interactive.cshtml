@@ -1,0 +1,11 @@
+﻿@page "/interactive"
+
+<h1>Razor Page</h1>
+
+<component type="typeof(BlazorServerRazorPages.Pages.Shared.Counter)" render-mode="ServerPrerendered" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
