@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 
 <PageTitle>Index</PageTitle>
 
@@ -9,6 +10,21 @@
 Welcome to your new app.
 
 @RenderWelcomeInfo
+
+<ul>
+    <li>
+        <a href="consume-component-1">consume-component-1</a>
+    </li>
+    <li>
+        <a href="consume-component-2">consume-component-2</a>
+    </li>
+    <li>
+        <a href="consume-component-3">consume-component-3</a>
+    </li>
+    <li>
+        <a href="jeep">Jeep</a>
+    </li>
+</ul>
 
 <ul>
     <li>
@@ -188,6 +204,14 @@ Welcome to your new app.
 @code {
     private RenderFragment RenderWelcomeInfo = __builder =>
     {
-        <p>Render fragments for reusable rendering logic <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-6.0#render-fragments-for-reusable-rendering-logic">Link</a></p>
+    <p>Render fragments for reusable rendering logic <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-6.0#render-fragments-for-reusable-rendering-logic">Link</a></p>
     };
+
+
+    // Не попадает сюда в брейкпойнты почему-то
+    public async Task OnAfterRenderAsync()
+    {
+      var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+    }
 }
+
