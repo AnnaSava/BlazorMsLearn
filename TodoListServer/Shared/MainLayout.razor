@@ -8,8 +8,7 @@
         <div class="sidebar">
             <NavMenu />
         </div>
-        <main>            
-            <button @onclick="ChangeToDarkTheme">Dark mode</button>
+        <main>
             <div class="top-row px-4">
                 <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
             </div>
@@ -17,7 +16,11 @@
             <article class="content px-4">
                 @Body
             </article>
-        </main>        
+            <button @onclick="ChangeToDarkTheme">Dark mode</button>
+                    <div class="bottom-row px-4">
+            <CultureSelector />
+        </div> 
+        </main>      
     </div>
 </CascadingValue>
 
