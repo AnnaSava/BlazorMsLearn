@@ -56,9 +56,16 @@ else
     private int maxAllowedFiles = 3;
     private bool isLoading;
     private decimal progressPercent;
+    CancellationTokenSource source = new CancellationTokenSource();
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
+        if(isLoading)
+        {
+            source.Cancel();
+            source = new CancellationTokenSource();
+        }
+
         isLoading = true;
         loadedFiles.Clear();
         progressPercent = 0;
@@ -79,7 +86,7 @@ else
 
                 while ((bytesRead = await readStream.ReadAsync(buffer)) != 0)
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(1000);
 
                     totalRead += bytesRead;
 
