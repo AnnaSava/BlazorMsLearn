@@ -1,0 +1,20 @@
+﻿@page "/element-reference-3"
+@inject IJSRuntime JS
+
+<input @ref="username" />
+
+<button @onclick="OnClickMethod">Do something generic</button>
+
+<p>
+    returnValue: @returnValue
+</p>
+
+@code {
+    private ElementReference username;
+    private string? returnValue;
+
+    private async Task OnClickMethod()
+    {
+        returnValue = await username.GenericMethod<string>(JS);
+    }
+}

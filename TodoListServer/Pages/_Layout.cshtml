@@ -12,16 +12,22 @@
     <link href="css/site.css" rel="stylesheet" />
     <link href="TodoListServer.styles.css" rel="stylesheet" />
     <link href="_content/RazorClassLibraryDemo/additionalStyles.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
     <script>
+        // This example modifies the Document Object Model (DOM) directly for demonstration purposes only.
       window.setElementText1 = (element, text) => element.innerText = text;
     </script>
     <script>
+        // This example modifies the Document Object Model (DOM) directly for demonstration purposes only.
       window.setElementText2 = (element, text) => {
         element.innerText = text;
         return text;
       };
     </script>
+    <style>
+        .red { color: red }
+    </style>
 </head>
 <body>
     @RenderBody()
@@ -39,15 +45,86 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script>
-  Blazor.registerCustomEventType('custompaste', {
-      browserEventName: 'paste',
-      createEventArgs: event => {
-        return {
-          eventTimestamp: new Date(),
-          pastedData: event.clipboardData.getData('text')
-        };
+      Blazor.registerCustomEventType('custompaste', {
+          browserEventName: 'paste',
+          createEventArgs: event => {
+            return {
+              eventTimestamp: new Date(),
+              pastedData: event.clipboardData.getData('text')
+            };
+          }
+      });
+    </script>
+    <script>
+      window.convertArray = (win1251Array) => {
+        var win1251decoder = new TextDecoder('windows-1251');
+        var bytes = new Uint8Array(win1251Array);
+        var decodedArray = win1251decoder.decode(bytes);
+        console.log(decodedArray);
+        return decodedArray;
+      };
+    </script>
+    <script>
+      window.displayTickerAlert1 = (symbol, price) => {
+        alert(`${symbol}: $${price}!`);
+      };
+    </script>
+    <script>
+      window.displayTickerAlert2 = (symbol, price) => {
+        if (price < 20) {
+          alert(`${symbol}: $${price}!`);
+          return "User alerted in the browser.";
+        } else {
+          return "User NOT alerted.";
+        }
+      };
+    </script>
+    <script>
+        window.interopFunctions = {
+          clickElement : function (element) {
+            element.click();
+            console.log('clicked');
+            return 'returned click';
+          }
+        }
+    </script>
+    <script>
+      function setElementClass(element, className) {
+        var myElement = element;
+        myElement.classList.add(className);
       }
-  });
-</script>
+    </script>
+    <script>
+      window.receiveByteArray = (bytes) => {
+        let utf8decoder = new TextDecoder();
+        let str = utf8decoder.decode(bytes);
+        return str;
+      };
+    </script>
+    <script>
+      class Helpers {
+        static #controller = new AbortController();
+
+        static async #sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        static async longRunningFn() {
+          var i = 0;
+          while (!this.#controller.signal.aborted) {
+            i++;
+            console.log(`longRunningFn: ${i}`);
+            await this.#sleep(1000);
+          }
+        }
+
+        static stopFn() {
+          this.#controller.abort();
+          console.log('longRunningFn aborted!');
+        }
+      }
+
+      window.Helpers = Helpers;
+    </script>
 </body>
 </html>

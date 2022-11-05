@@ -1,0 +1,32 @@
+﻿@page "/call-js-example-12"
+@inject IJSRuntime JS
+
+<h1>Cancel long-running JS interop</h1>
+
+<p>
+    <button @onclick="StartTask">Start Task</button>
+    <button @onclick="CancelTask">Cancel Task</button>
+</p>
+
+@code {
+    private CancellationTokenSource? cts;
+
+    private async Task StartTask()
+    {
+        cts = new CancellationTokenSource();
+        cts.Token.Register(() => JS.InvokeVoidAsync("Helpers.stopFn"));
+
+        await JS.InvokeVoidAsync("Helpers.longRunningFn");
+    }
+
+    private void CancelTask()
+    {
+        cts?.Cancel();
+    }
+
+    public void Dispose()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+    }
+}
