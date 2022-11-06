@@ -45,6 +45,38 @@
             };
         }
     </script>
-</body>
+    <script>
+        const randomInt = () => Math.floor(Math.random() * 99999);
 
+        window.invokeMethodsAsync = async (syncInterop, dotNetHelper1, dotNetHelper2) => {
+            var n = randomInt();
+            console.log(`JS: invokeMethodAsync:Update('string ${n}')`);
+            await dotNetHelper1.invokeMethodAsync('Update', `string ${n}`);
+
+            n = randomInt();
+            console.log(`JS: invokeMethodAsync:UpdateAsync('string ${n}')`);
+            await dotNetHelper1.invokeMethodAsync('UpdateAsync', `string ${n}`);
+
+            if (syncInterop) {
+                n = randomInt();
+                console.log(`JS: invokeMethod:Update('string ${n}')`);
+                dotNetHelper1.invokeMethod('Update', `string ${n}`);
+            }
+
+            n = randomInt();
+            console.log(`JS: invokeMethodAsync:Update(${n})`);
+            await dotNetHelper2.invokeMethodAsync('Update', n);
+
+            n = randomInt();
+            console.log(`JS: invokeMethodAsync:UpdateAsync(${n})`);
+            await dotNetHelper2.invokeMethodAsync('UpdateAsync', n);
+
+            if (syncInterop) {
+                n = randomInt();
+                console.log(`JS: invokeMethod:Update(${n})`);
+                dotNetHelper2.invokeMethod('Update', n);
+            }
+        };
+    </script>
+</body>
 </html>
