@@ -1,0 +1,54 @@
+﻿@page "/fetch-data-returns-html-on-exception"
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@inject HttpClient Http
+
+<h1>Fetch data but receive HTML on unhandled exception</h1>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h2>Temperatures by Date</h2>
+
+    <ul>
+        @foreach (var forecast in forecasts)
+        {
+            <li>
+                @forecast.Date.ToShortDateString():
+                @forecast.TemperatureC &#8451;
+                @forecast.TemperatureF &#8457;
+            </li>
+        }
+    </ul>
+}
+
+<p>
+    @exceptionMessage
+</p>
+
+@code {
+    private WeatherForecast[]? forecasts;
+    private string? exceptionMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // The URI endpoint "WeatherForecast" is misspelled on purpose on the 
+            // next line. See the preceding text for more information.
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/wether.json");
+        }
+        catch (NotSupportedException exception)
+        {
+            exceptionMessage = exception.Message;
+        }
+        catch (Exception exception)
+        {
+            exceptionMessage = exception.Message;
+        }
+    }
+}

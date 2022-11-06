@@ -1,0 +1,34 @@
+﻿@page "/fetch-data-via-typed-httpclient"
+@using System.Threading.Tasks
+@inject WeatherForecastHttpClient Http
+
+<h1>Fetch data via typed <code>HttpClient</code></h1>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h2>Temperatures by Date</h2>
+
+    <ul>
+        @foreach (var forecast in forecasts)
+        {
+            <li>
+                @forecast.Date.ToShortDateString():
+                @forecast.TemperatureC &#8451;
+                @forecast.TemperatureF &#8457;
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetForecastAsync();
+    }
+}

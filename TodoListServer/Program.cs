@@ -12,6 +12,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<NotifierService>();
 builder.Services.AddScoped<TimerService>();
 builder.Services.AddLocalization();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
