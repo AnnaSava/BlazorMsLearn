@@ -13,6 +13,7 @@ builder.Services.AddScoped<NotifierService>();
 builder.Services.AddScoped<TimerService>();
 builder.Services.AddLocalization();
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<StateContainer>();
 
 var app = builder.Build();
 

@@ -15,8 +15,10 @@
 @code {
     private async Task<Stream> GetImageStreamAsync()
     {
-        return await Http.GetStreamAsync(
-            "https://avatars.githubusercontent.com/u/9141961");
+        //return await Http.GetStreamAsync(
+        //    "https://avatars.githubusercontent.com/u/9141961");
+            return await Http.GetStreamAsync(
+            "https://localhost:5001/api/files/5e89bbd8f4802f1f841078be");
     }
 
     private async Task SetImageAsync()
